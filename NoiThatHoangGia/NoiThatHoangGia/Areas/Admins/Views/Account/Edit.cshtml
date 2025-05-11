@@ -1,0 +1,43 @@
+﻿@model NoiThatHoangGia.Areas.Admins.Models.EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admins/Views/Shared/_Admins.cshtml";
+}
+
+<h2>Chỉnh sửa người dùng</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Chọn quyền:</label>
+        @foreach (var role in Model.AvailableRoles)
+        {
+            <div class="form-check">
+                <input type="checkbox" name="SelectedRoles" value="@role.Value" class="form-check-input"
+                @(role.Selected ? "checked" : "") />
+                <label class="form-check-label">@role.Text</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
